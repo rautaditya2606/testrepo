@@ -181,3 +181,56 @@ button:hover {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+.final-container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.final-gif {
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.final-text {
+    color: #fff;
+}
+
+.final-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ff0000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.ip-text {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.ip-highlight {
+    background: #ff0000;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.warning-text {
+    font-size: 1.8rem;
+    color: #ff0000;
+    font-weight: bold;
+    margin-top: 1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
