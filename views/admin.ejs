@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .admin-container { max-width: 800px; margin: 20px auto; padding: 20px; }
+        .entry { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .password-form { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Instagram IDs Collection 📱</h1>
+        <% if (!authenticated) { %>
+            <form class="password-form" method="GET">
+                <input type="password" name="password" placeholder="Enter password">
+                <button type="submit">Login</button>
+            </form>
+        <% } else { %>
+            <div id="entries">
+                <% entries.forEach(entry => { %>
+                    <div class="entry">
+                        <%= entry %>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

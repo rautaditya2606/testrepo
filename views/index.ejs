@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine?</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="question-container">
+            <div id="image-container">
+                <img src="https://cdn.pixabay.com/animation/2023/01/07/11/02/11-02-30-972_512.gif" alt="">
+            </div>
+            <h1 id="question">Are you a girl or boy?</h1>
+            <div class="buttons" id="gender-buttons">
+                <button class="girl-btn" onclick="handleGender('girl')">Girl</button>
+                <button class="boy-btn" onclick="handleGender('boy')">Boy</button>
+            </div>
+            <div class="buttons" id="yes-no-buttons" style="display: none;">
+                <button class="yes-btn heart-yes" onclick="handleResponse(true)">❤️ Yes</button>
+                <button class="no-btn heart-no" onclick="handleResponse(false)">💔 nuh uh</button>
+            </div>
+        </div>
+        <div id="instagram-form" style="display: none;">
+            <div class="heart-container">
+                <div class="dil">
+                    <img src="https://i.pinimg.com/originals/ff/22/f2/ff22f2e4df37bfb33815fc844ebe90cf.gif" alt="">
+                </div>
+            </div>
+            <h2>You made my day! 💖</h2>
+            <p>Let me slide into your DMs 😊</p>
+            <div class="form-group">
+                <input type="text" id="instagram-id" placeholder="@your.instagram">
+                <button onclick="submitInstagram()" class="submit-btn">Share Instagram</button>
+            </div>
+        </div>
+        <div id="final-message" style="display: none;">
+            <img src="https://media1.tenor.com/m/K-wLBEYEtr8AAAAd/sonic-freaky.gif" alt="Coming for you">
+            <h2>You're done .... oil up lil bro .. im coming at 7pm 🏃‍♂️</h2>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { text: "Will you be my girlfriend?", image: "https://rgsfilmclub.wordpress.com/wp-content/uploads/2015/06/flynn1.jpg?w=223" },
+            { text: "Whyyy....tap yes pleaseeeeee", image: "https://i.imgflip.com/pqcjo.jpg?a484176" },
+            { text: "I have chocolates 🍫", image: "https://i.postimg.cc/4ybBxtqP/This-is-me-when-i-learn-that-woman-had-to-go-with-many-shit.png" },
+            { text: "I will be good boy", image: "https://i.postimg.cc/rph0znjk/I-wear-this-btw.png" },
+            { text: "Okay.. u sure? you won't be my pookie?", image: "https://64.media.tumblr.com/d415ac25738fc10bac9e8d26cbfec7a0/aa63225929b3123a-18/s1280x1920/9769b5cdfd089c6c1d1e621344805bc6786a2162.jpg" }
+        ];
+
+        let currentQuestion = -1;
+
+        function handleGender(gender) {
+            if (gender === 'boy') {
+                document.getElementById('image-container').innerHTML = '<img src="https://i.postimg.cc/bJvBZg07/x3rbph91a2jc1.jpg">';
+                document.getElementById('gender-buttons').style.display = 'none';
+                document.getElementById('question').style.display = 'none';
+                return;
+            }
+            document.getElementById('gender-buttons').style.display = 'none';
+            document.getElementById('yes-no-buttons').style.display = 'block';
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                document.getElementById('image-container').innerHTML =
+                    `<img src="${questions[currentQuestion].image}" alt="">`;
+                document.getElementById('question').textContent = questions[currentQuestion].text;
+            } else {
+                showFinalMessage();
+            }
+        }
+
+        function handleResponse(isYes) {
+            if (isYes) {
+                document.getElementById('question-container').style.display = 'none';
+                document.getElementById('instagram-form').style.display = 'block';
+            } else {
+                if (currentQuestion === questions.length - 1) {
+                    // If it's the last question and "nuh uh" is clicked, show final message
+                    document.getElementById('question-container').style.display = 'none';
+                    document.getElementById('final-message').style.display = 'block';
+                } else {
+                    nextQuestion();
+                }
+            }
+        }
+
+        function submitInstagram() {
+            const instagramId = document.getElementById('instagram-id').value;
+            fetch('/submitInstagram', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ instagramId })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Thanks! I will DM you soon 💕');
+                    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                }
+            });
+        }
+
+        function showFinalMessage() {
+            fetch('/getIP')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('question-container').style.display = 'none';
+                    document.getElementById('final-message').style.display = 'block';
+                });
+        }
+    </script>
+</body>
+
+</html>
