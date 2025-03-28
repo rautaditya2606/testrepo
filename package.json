@@ -9,7 +9,8 @@
     "author": "aditya raut",
     "license": "ISC",
     "dependencies": {
-        "express": "^4.18.2",
-        "ejs": "^3.1.9"
+        "dotenv": "^16.4.7",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2"
     }
 }

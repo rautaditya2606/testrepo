@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;  // Use PORT from environment or fallback to 8080
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -39,7 +40,7 @@ app.post('/submitInstagram', (req, res) => {
 
 app.get('/admin', (req, res) => {
     const password = req.query.password;
-    const authenticated = password === 'admin123'; // Change this password!
+    const authenticated = password === process.env.ADMIN_PASSWORD;
 
     if (authenticated) {
         fs.readFile('instagram_ids.txt', 'utf8', (err, data) => {
